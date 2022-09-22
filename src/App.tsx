@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {FC} from 'react';
+import {AirportDetail, Airports, Header} from "./components";
+import {Routes,Route,Navigate} from "react-router-dom";
+import {MainLayouts} from "./layouts/MainLayouts";
+import {FilterPage} from "./pages/FilterPage";
+import {AirportsPage} from "./pages";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App:FC = () => {
 
-export default App;
+    return (
+       <Routes>
+           <Route path={'/'} element={<MainLayouts/>}>
+           <Route index element={<Navigate to={'home'} />}/>
+           <Route path={'home'} element={<AirportsPage />}/>
+               <Route path={'home/:id'} element={<AirportDetail/>}/>
+           <Route path={'filter'} element={<FilterPage/>}/>
+</Route>
+       </Routes>
+    );
+};
+
+export {App};
